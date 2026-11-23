@@ -1,68 +1,144 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>STAND</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f6fa;
-      color: #172033;
-      text-align: center;
-    }
-    header {
-      padding: 24px;
-      background: #172033;
-      color: white;
-    }
-    .logo {
-      font-size: 42px;
-      font-weight: bold;
-      letter-spacing: 3px;
-      color: #72d5d0;
-    }
-    main { padding: 35px 18px; }
-    .welcome {
-      background: white;
-      max-width: 420px;
-      margin: auto;
-      padding: 28px 20px;
-      border-radius: 18px;
-      box-shadow: 0 5px 20px #00000012;
-    }
-    h1 { color: #172033; }
-    p { line-height: 1.8; color: #647084; }
-    button {
-      background: #172033;
-      color: white;
-      border: 0;
-      border-radius: 10px;
-      padding: 13px 25px;
-      font-size: 16px;
-      margin-top: 15px;
-    }
-    footer { margin-top: 35px; color: #8992a3; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STAND Social</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f3f5f9;color:#182238;font-family:Arial,sans-serif}
+header{background:#172238;color:white;padding:18px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:29px;font-weight:900;letter-spacing:2px;color:#70d8d0}
+header small{color:#c5d1df}
+main{max-width:620px;margin:auto;padding:16px 12px 90px}
+.welcome{background:#172238;color:white;padding:20px;border-radius:17px;margin-bottom:17px}
+.welcome h2{margin:0 0 8px;color:#75d9d0}
+.welcome p{color:#d5dfeb;line-height:1.7}
+.card{background:white;padding:17px;border-radius:15px;margin-bottom:14px;box-shadow:0 3px 12px #1722380b}
+.user{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.avatar{width:43px;height:43px;border-radius:50%;background:#d9f3ef;color:#172238;display:grid;place-items:center;font-weight:bold;font-size:19px}
+.user small{display:block;color:#8791a2;margin-top:4px}
+.post{line-height:1.8;color:#344158}
+.post-image{height:155px;border-radius:12px;background:linear-gradient(135deg,#172238,#438e91);display:grid;place-items:center;color:white;font-size:30px;font-weight:bold;margin-top:12px}
+.actions{display:flex;gap:18px;border-top:1px solid #edf0f4;padding-top:12px;margin-top:13px}
+.actions button{background:none;color:#526078;padding:5px 0}
+button{border:0;cursor:pointer;font-size:15px}
+nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #e5e9ef;display:flex;justify-content:space-around;padding:12px 4px;z-index:5}
+nav button{background:none;color:#657187;font-size:13px}
+nav button.active{color:#168e88;font-weight:bold}
+.primary{background:#172238;color:white;border-radius:10px;padding:12px 18px}
+input,textarea{width:100%;padding:12px;border:1px solid #dce2eb;border-radius:10px;margin:8px 0;font:inherit}
+.hidden{display:none}
+h3{margin-top:0}
+.muted{color:#8791a2;font-size:13px}
+</style>
 </head>
 <body>
-  <header>
-    <div class="logo">ST</div>
-    <div>STAND — Social Platform</div>
-  </header>
+<header>
+ <div><div class="logo">ST</div><small>STAND SOCIAL</small></div>
+ <div>🌐 <small>العالم بين يديك</small></div>
+</header>
 
-  <main>
-    <section class="welcome">
-      <h1>مرحباً بك في STAND</h1>
-      <p>مساحة جديدة للتواصل، مشاركة اللحظات، واكتشاف العالم.</p>
-      <p>Welcome to STAND</p>
-      <button onclick="alert('قريباً: إنشاء حساب STAND')">
-        ابدأ الآن
-      </button>
-    </section>
-    <footer>STAND © 2026</footer>
-  </main>
+<main>
+<section id="home">
+ <div class="welcome">
+  <h2>مرحباً بك في STAND</h2>
+  <p>شارك لحظاتك، تواصل مع العالم، وكن جزءاً من مجتمع جديد.</p>
+  <strong>Welcome to STAND</strong>
+ </div>
+ <div class="card">
+  <h3>ماذا يدور في ذهنك؟</h3>
+  <textarea id="newPost" rows="2" placeholder="شارك منشوراً جديداً..."></textarea>
+  <button class="primary" onclick="publish()">نشر المنشور</button>
+ </div>
+ <div id="feed">
+  <article class="card">
+   <div class="user"><div class="avatar">S</div><div><b>STAND Official</b><small>الحساب الرسمي · الآن</small></div></div>
+   <div class="post">أهلاً بكم في بداية رحلتنا! 🚀 منصة STAND تجمعنا لنشارك أفكارنا ولحظاتنا مع العالم.</div>
+   <div class="post-image">STAND</div>
+   <div class="actions"><button onclick="like(this)">♡ إعجاب <span>0</span></button><button onclick="comment()">💬 تعليق</button><button onclick="share()">↗ مشاركة</button></div>
+  </article>
+  <article class="card">
+   <div class="user"><div class="avatar">A</div><div><b>Ahmed</b><small>منذ 10 دقائق</small></div></div>
+   <div class="post">كل بداية جميلة تحتاج إلى حلم وإصرار. ✨</div>
+   <div class="actions"><button onclick="like(this)">♡ إعجاب <span>0</span></button><button onclick="comment()">💬 تعليق</button><button onclick="share()">↗ مشاركة</button></div>
+  </article>
+  <article class="card">
+   <div class="user"><div class="avatar">M</div><div><b>Mohammed</b><small>منذ ساعة</small></div></div>
+   <div class="post">مرحباً بالعالم من STAND 🌍</div>
+   <div class="actions"><button onclick="like(this)">♡ إعجاب <span>0</span></button><button onclick="comment()">💬 تعليق</button><button onclick="share()">↗ مشاركة</button></div>
+  </article>
+ </div>
+</section>
+
+<section id="search" class="hidden">
+ <div class="card"><h3>اكتشف STAND</h3><input id="searchBox" placeholder="ابحث عن الأشخاص والمنشورات..." oninput="searchPosts()"><div id="searchResult" class="muted">اكتب كلمة للبحث في المنشورات.</div></div>
+</section>
+
+<section id="create" class="hidden">
+ <div class="card"><h3>إنشاء منشور</h3><textarea id="createText" rows="5" placeholder="ماذا تريد أن تشارك مع العالم؟"></textarea><button class="primary" onclick="publishFromCreate()">نشر الآن</button></div>
+</section>
+
+<section id="profile" class="hidden">
+ <div class="card" style="text-align:center;padding:30px 15px">
+  <div class="avatar" style="width:75px;height:75px;margin:auto;font-size:30px">S</div>
+  <h2>عضو STAND</h2><p class="muted">@stand_user</p>
+  <p>مرحباً بك في مجتمع STAND</p>
+  <div>0 المتابعون　 |　 0 أتابع</div>
+  <p class="muted">هذا ملف تجريبي للعرض فقط</p>
+ </div>
+</section>
+
+<section id="notifications" class="hidden">
+ <div class="card"><h3>الإشعارات 🔔</h3><p>ستظهر إشعاراتك هنا عند تفعيل النظام.</p></div>
+</section>
+</main>
+
+<nav>
+ <button class="active" onclick="showPage('home',this)">⌂<br>الرئيسية</button>
+ <button onclick="showPage('search',this)">⌕<br>بحث</button>
+ <button onclick="showPage('create',this)">＋<br>نشر</button>
+ <button onclick="showPage('notifications',this)">♧<br>الإشعارات</button>
+ <button onclick="showPage('profile',this)">◉<br>حسابي</button>
+</nav>
+
+<script>
+function showPage(id,btn){
+ document.querySelectorAll('main section').forEach(s=>s.classList.add('hidden'));
+ document.getElementById(id).classList.remove('hidden');
+ document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+ btn.classList.add('active');
+}
+function like(btn){
+ let count=btn.querySelector('span');
+ let liked=btn.dataset.liked==='yes';
+ count.textContent=Number(count.textContent)+(liked?-1:1);
+ btn.dataset.liked=liked?'no':'yes';
+ btn.firstChild.textContent=liked?'♡ إعجاب ':'♥ أعجبني ';
+}
+function comment(){alert('قسم التعليقات قيد التطوير في النسخة التجريبية.');}
+function share(){alert('يمكنك مشاركة رابط STAND بعد تفعيل المشاركة.');}
+function addPost(text){
+ if(!text.trim()){alert('اكتب شيئاً قبل النشر');return;}
+ let article=document.createElement('article');
+ article.className='card';
+ article.innerHTML='<div class="user"><div class="avatar">S</div><div><b>عضو STAND</b><small>الآن · منشور تجريبي</small></div></div><div class="post"></div><div class="actions"><button onclick="like(this)">♡ إعجاب <span>0</span></button><button onclick="comment()">💬 تعليق</button><button onclick="share()">↗ مشاركة</button></div>';
+ article.querySelector('.post').textContent=text;
+ document.getElementById('feed').prepend(article);
+ document.getElementById('newPost').value='';
+ document.getElementById('createText').value='';
+ alert('تمت إضافة المنشور للعرض التجريبي!');
+ showPage('home',document.querySelector('nav button'));
+}
+function publish(){addPost(document.getElementById('newPost').value);}
+function publishFromCreate(){addPost(document.getElementById('createText').value);}
+function searchPosts(){
+ let q=document.getElementById('searchBox').value.toLowerCase();
+ let posts=[...document.querySelectorAll('#feed .card')];
+ let found=posts.filter(p=>p.innerText.toLowerCase().includes(q));
+ document.getElementById('searchResult').textContent=q?(found.length+' منشور مطابق'): 'اكتب كلمة للبحث في المنشورات.';
+}
+</script>
 </body>
 </html>
