@@ -142,5 +142,12 @@ function searchPosts(){
  document.getElementById('searchResult').textContent=q?(found.length+' منشور مطابق'): 'اكتب كلمة للبحث في المنشورات.';
 }
 </script>
+ <script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/STAND/sw.js");
+  });
+}
+ </script>
 </body>
 </html>
